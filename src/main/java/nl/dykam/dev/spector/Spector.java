@@ -39,6 +39,22 @@ public class Spector extends SpectorKey {
         }
     }
 
+    private void showTo(Spector spector) {
+        spector.show(this);
+    }
+
+    public void showAll() {
+        for (Spector spector : manager.getSpectors()) {
+            show(spector);
+        }
+    }
+
+    public void showToAll() {
+        for (Spector spector : manager.getSpectors()) {
+            showTo(spector);
+        }
+    }
+
     public void hide(Spector other) {
         if(canSeeOthersByDefault) {
             offDefault.add(other);
@@ -51,6 +67,22 @@ public class Spector extends SpectorKey {
             for (Player otherMember : otherMembers) {
                 player.hidePlayer(otherMember);
             }
+        }
+    }
+
+    private void hideFor(Spector spector) {
+        spector.hide(this);
+    }
+
+    public void hideAll() {
+        for (Spector spector : manager.getSpectors()) {
+            hide(spector);
+        }
+    }
+
+    public void hideForAll() {
+        for (Spector spector : manager.getSpectors()) {
+            hideFor(spector);
         }
     }
 
