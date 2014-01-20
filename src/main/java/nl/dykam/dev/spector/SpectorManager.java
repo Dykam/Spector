@@ -25,6 +25,7 @@ public class SpectorManager {
         this.defaultCanSee = defaultCanSee;
         this.defaultCanBeSeen = defaultCanBeSeen;
         defaultSpector = new Spector(this, SpectorPlugin.instance(), "default", defaultCanSee);
+        SpectorShield.noShield(defaultSpector.getShield());
         spectors.put(defaultSpector, defaultSpector);
     }
 
