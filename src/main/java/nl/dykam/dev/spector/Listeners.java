@@ -6,9 +6,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 class Listeners implements Listener {
-    private SpectorGroupManager manager;
+    private SpectorManager manager;
 
-    public Listeners(SpectorGroupManager manager) {
+    public Listeners(SpectorManager manager) {
         this.manager = manager;
     }
 

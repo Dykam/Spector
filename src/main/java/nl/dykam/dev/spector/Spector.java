@@ -6,23 +6,23 @@ import org.bukkit.plugin.Plugin;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SpectorGroup extends SpectorGroupKey {
-    final SpectorGroupManager manager;
+public class Spector extends SpectorKey {
+    final SpectorManager manager;
     private boolean canSeeOthersByDefault;
-    private final Set<SpectorGroup> offDefault = new HashSet<>();
+    private final Set<Spector> offDefault = new HashSet<>();
     final Set<Player> members = new HashSet<>();
 
-    SpectorGroup(SpectorGroupManager manager, Plugin creator, String name) {
+    Spector(SpectorManager manager, Plugin creator, String name) {
         this(manager, creator, name, false);
     }
 
-    SpectorGroup(SpectorGroupManager manager, Plugin creator, String name, boolean canSeeOthersByDefault) {
+    Spector(SpectorManager manager, Plugin creator, String name, boolean canSeeOthersByDefault) {
         super(creator, name);
         this.manager = manager;
         this.canSeeOthersByDefault = canSeeOthersByDefault;
     }
 
-    public void show(SpectorGroup other) {
+    public void show(Spector other) {
         if(canSeeOthersByDefault) {
             offDefault.remove(other);
         } else {
@@ -37,7 +37,7 @@ public class SpectorGroup extends SpectorGroupKey {
         }
     }
 
-    public void hide(SpectorGroup other) {
+    public void hide(Spector other) {
         if(canSeeOthersByDefault) {
             offDefault.add(other);
         } else {
@@ -52,12 +52,12 @@ public class SpectorGroup extends SpectorGroupKey {
         }
     }
 
-    public boolean canSee(SpectorGroup other) {
+    public boolean canSee(Spector other) {
         return canSeeOthersByDefault != offDefault.contains(other);
     }
 
     public boolean canSee(Player other) {
-        return canSee(manager.getGroup(other));
+        return canSee(manager.getSpector(other));
     }
 
     public Iterable<Player> getMembers() {
@@ -65,12 +65,12 @@ public class SpectorGroup extends SpectorGroupKey {
     }
 
     public void assignTo(Player player) {
-        SpectorGroup current = manager.getGroup(player);
+        Spector current = manager.getSpector(player);
         if(current != null)
             current.members.remove(player);
         manager.spectorMemberships.put(player, this);
 
-        for (SpectorGroup other : manager.getGroups()) {
+        for (Spector other : manager.getSpectors()) {
             boolean canSeeOther = canSee(other);
             boolean otherCanSee = other.canSee(this);
             for (Player otherPlayer : other.getMembers()) {

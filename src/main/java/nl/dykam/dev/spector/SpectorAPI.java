@@ -3,16 +3,16 @@ package nl.dykam.dev.spector;
 import org.bukkit.plugin.Plugin;
 
 public class SpectorAPI {
-    static SpectorGroupManager manager;
-    public static SpectorGroup create(Plugin creator, String name) {
+    static SpectorManager manager;
+    public static Spector create(Plugin creator, String name) {
         return manager.create(creator, name);
     }
 
     static void initialize() {
-        manager = new SpectorGroupManager();
+        manager = new SpectorManager();
     }
 
-    public static SpectorGroupManager getManager() {
+    public static SpectorManager getManager() {
         return manager;
     }
 }

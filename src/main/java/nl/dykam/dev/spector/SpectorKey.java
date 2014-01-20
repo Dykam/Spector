@@ -2,11 +2,11 @@ package nl.dykam.dev.spector;
 
 import org.bukkit.plugin.Plugin;
 
-public class SpectorGroupKey {
+public class SpectorKey {
     protected final Plugin creator;
     protected final String name;
 
-    public SpectorGroupKey(Plugin creator, String name) {
+    public SpectorKey(Plugin creator, String name) {
         this.creator = creator;
         this.name = name;
     }
@@ -24,7 +24,7 @@ public class SpectorGroupKey {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SpectorGroupKey that = (SpectorGroupKey) o;
+        SpectorKey that = (SpectorKey) o;
 
         if (!creator.equals(that.creator)) return false;
         if (!name.equals(that.name)) return false;
