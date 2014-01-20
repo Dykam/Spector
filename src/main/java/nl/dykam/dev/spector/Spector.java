@@ -1,5 +1,6 @@
 package nl.dykam.dev.spector;
 
+import org.apache.commons.lang.NullArgumentException;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -11,6 +12,7 @@ public class Spector extends SpectorKey {
     private boolean canSeeOthersByDefault;
     private final Set<Spector> offDefault = new HashSet<>();
     final Set<Player> members = new HashSet<>();
+    private SpectorShield shield = new SpectorShield();
 
     Spector(SpectorManager manager, Plugin creator, String name) {
         this(manager, creator, name, false);
@@ -62,6 +64,16 @@ public class Spector extends SpectorKey {
 
     public Iterable<Player> getMembers() {
         return members;
+    }
+
+    public SpectorShield getShield() {
+        return shield;
+    }
+
+    public void setShield(SpectorShield shield) {
+        if(shield == null)
+            throw new NullArgumentException("shield");
+        this.shield = shield;
     }
 
     public void assignTo(Player player) {

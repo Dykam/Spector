@@ -16,5 +16,6 @@ public class SpectorPlugin extends JavaPlugin {
         instance = this;
         SpectorAPI.initialize();
         Bukkit.getPluginManager().registerEvents(new Listeners(SpectorAPI.getManager()), this);
+        Bukkit.getPluginManager().registerEvents(new ShieldListener(SpectorAPI.getManager()), this);
     }
 }
