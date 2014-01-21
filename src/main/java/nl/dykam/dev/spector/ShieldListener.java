@@ -19,28 +19,28 @@ public class ShieldListener implements Listener {
         this.manager = manager;
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGH)
     private void onPlayerInteract(PlayerInteractEvent event) {
         SpectorShield shield = manager.getSpector(event.getPlayer()).getShield();
         if(!shield.canInteract())
             event.setCancelled(true);
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGH)
     private void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         SpectorShield shield = manager.getSpector(event.getPlayer()).getShield();
         if(!shield.canInteract())
             event.setCancelled(true);
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGH)
     private void onBlockBreak(BlockBreakEvent event) {
         SpectorShield shield = manager.getSpector(event.getPlayer()).getShield();
         if(!shield.canInteract())
             event.setCancelled(true);
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGH)
     private void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         /*if (event.getEntity() instanceof Player) {
             SpectorShield shield = manager.getSpector((Player) event.getEntity()).getShield();
@@ -53,7 +53,7 @@ public class ShieldListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGH)
     private void onEntityDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
             SpectorShield shield = manager.getSpector((Player) event.getEntity()).getShield();
@@ -62,7 +62,7 @@ public class ShieldListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGH)
     private void onEntityTargetLivingEntity(EntityTargetLivingEntityEvent event) {
         if(event.getTarget() instanceof Player) {
             SpectorShield shield = manager.getSpector((Player) event.getTarget()).getShield();
@@ -71,7 +71,7 @@ public class ShieldListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGH)
     private void onAsyncPlayerChat(AsyncPlayerChatEvent event) {
         SpectorShield shield = manager.getSpector(event.getPlayer()).getShield();
         if(!shield.canChat()) {
@@ -80,7 +80,7 @@ public class ShieldListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGH)
     private void onPlayerPickupItem(PlayerPickupItemEvent event) {
         SpectorShield shield = manager.getSpector(event.getPlayer()).getShield();
         if(!shield.canPickup()) {
@@ -88,14 +88,14 @@ public class ShieldListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGH)
     private void onPlayerDeath(PlayerDeathEvent event) {
         SpectorShield shield = manager.getSpector(event.getEntity()).getShield();
         if(!shield.canDrop())
             event.getDrops().clear();
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGH)
     private void onPlayerDropItem(PlayerDropItemEvent event) {
         SpectorShield shield = manager.getSpector(event.getPlayer()).getShield();
         if(!shield.canDrop())
