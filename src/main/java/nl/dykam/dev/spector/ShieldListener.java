@@ -74,16 +74,17 @@ public class ShieldListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     private void onAsyncPlayerChat(AsyncPlayerChatEvent event) {
         SpectorShield shield = manager.getSpector(event.getPlayer()).getShield();
-        if(!shield.canChat())
-            event.setCancelled(true);
-    }
-
-    @EventHandler(priority = EventPriority.LOWEST)
-    private void onAsyncPlayerChat(PlayerPickupItemEvent event) {
-        SpectorShield shield = manager.getSpector(event.getPlayer()).getShield();
         if(!shield.canChat()) {
             event.setCancelled(true);
             event.getPlayer().sendMessage(ChatColor.RED + "Chat is disabled currently disabled for you");
+        }
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    private void onPlayerPickupItem(PlayerPickupItemEvent event) {
+        SpectorShield shield = manager.getSpector(event.getPlayer()).getShield();
+        if(!shield.canPickup()) {
+            event.setCancelled(true);
         }
     }
 
