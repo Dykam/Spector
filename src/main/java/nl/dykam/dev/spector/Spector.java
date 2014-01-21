@@ -134,4 +134,9 @@ public class Spector extends SpectorKey {
     public void unAssignTo(Player player) {
         manager.getDefaultSpector().assignTo(player);
     }
+
+    @Override
+    public String toString() {
+        return "Spector{" + creator +":" + name + "'}";
+    }
 }

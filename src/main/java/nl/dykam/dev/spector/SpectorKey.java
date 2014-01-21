@@ -4,8 +4,8 @@ import org.bukkit.plugin.Plugin;
 
 public class SpectorKey {
     protected final Plugin creator;
-    protected final String name;
 
+    protected final String name;
     public SpectorKey(Plugin creator, String name) {
         this.creator = creator;
         this.name = name;
@@ -37,5 +37,10 @@ public class SpectorKey {
         int result = creator.hashCode();
         result = 31 * result + name.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SpectorKey{" + creator +":" + name + "'}";
     }
 }
