@@ -14,6 +14,7 @@ public class Spector extends SpectorKey {
     final Set<Player> members = new HashSet<>();
     private SpectorShield shield = new SpectorShield();
     private SpectorSettings settings = new SpectorSettings();
+    private Set<SpectorComponent> components;
 
     Spector(SpectorManager manager, Plugin creator, String name) {
         this(manager, creator, name, false);
@@ -23,6 +24,7 @@ public class Spector extends SpectorKey {
         super(creator, name);
         this.manager = manager;
         this.canSeeOthersByDefault = canSeeOthersByDefault;
+        components = new HashSet<>();
     }
 
     public void show(Spector other) {
@@ -95,6 +97,21 @@ public class Spector extends SpectorKey {
         return canSee(manager.getSpector(other));
     }
 
+    public void addComponent(SpectorComponent component) {
+        components.add(component);
+        for (Player player : getMembers()) {
+            component.apply(player, this);
+        }
+    }
+
+    public void removeComponent(SpectorComponent component) {
+        if(!components.remove(component))
+            return;
+        for (Player player : getMembers()) {
+            component.clear(player, this);
+        }
+    }
+
     public Iterable<Player> getMembers() {
         return members;
     }
@@ -119,12 +136,20 @@ public class Spector extends SpectorKey {
 
     public void assignTo(Player player) {
         Spector current = manager.getSpector(player);
-        if(current != null)
+        if(current != null) {
             current.members.remove(player);
+            for (SpectorComponent component : current.components) {
+                component.clear(player, this);
+            }
+        }
         manager.spectorMemberships.put(player, this);
         members.add(player);
         if(settings != null)
             SpectorSettings.apply(player, settings);
+        for (SpectorComponent component : components) {
+            component.apply(player, this);
+        }
+
 
         for (Spector other : manager.getSpectors()) {
             boolean canSeeOther = canSee(other);
