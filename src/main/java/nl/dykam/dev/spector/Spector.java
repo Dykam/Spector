@@ -13,6 +13,7 @@ public class Spector extends SpectorKey {
     private final Set<Spector> offDefault = new HashSet<>();
     final Set<Player> members = new HashSet<>();
     private SpectorShield shield = new SpectorShield();
+    private SpectorSettings settings = new SpectorSettings();
 
     Spector(SpectorManager manager, Plugin creator, String name) {
         this(manager, creator, name, false);
@@ -108,12 +109,22 @@ public class Spector extends SpectorKey {
         this.shield = shield;
     }
 
+    public SpectorSettings getSettings() {
+        return settings;
+    }
+
+    public void setSettings(SpectorSettings settings) {
+        this.settings = settings;
+    }
+
     public void assignTo(Player player) {
         Spector current = manager.getSpector(player);
         if(current != null)
             current.members.remove(player);
         manager.spectorMemberships.put(player, this);
         members.add(player);
+        if(settings != null)
+            SpectorSettings.apply(player, settings);
 
         for (Spector other : manager.getSpectors()) {
             boolean canSeeOther = canSee(other);
