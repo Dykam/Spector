@@ -1,5 +1,6 @@
 package nl.dykam.dev.spector;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -80,8 +81,10 @@ public class ShieldListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     private void onAsyncPlayerChat(PlayerPickupItemEvent event) {
         SpectorShield shield = manager.getSpector(event.getPlayer()).getShield();
-        if(!shield.canPickup())
+        if(!shield.canChat()) {
             event.setCancelled(true);
+            event.getPlayer().sendMessage(ChatColor.RED + "Chat is disabled currently disabled for you");
+        }
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
