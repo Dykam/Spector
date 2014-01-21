@@ -113,6 +113,7 @@ public class Spector extends SpectorKey {
         if(current != null)
             current.members.remove(player);
         manager.spectorMemberships.put(player, this);
+        members.add(player);
 
         for (Spector other : manager.getSpectors()) {
             boolean canSeeOther = canSee(other);
